@@ -1,0 +1,780 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="getting_started.html">
+      
+      
+        <link rel="next" href="protein_preparation_and_docking.html">
+      
+      
+      <link rel="icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.46">
+    
+    
+      
+        <title>Molecule Preparation - MolDocker Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.6f8fc17f.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="css/extra.css">
+    
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="light-blue" data-md-color-accent="indogo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#molecule-preparation" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="index.html" title="MolDocker Documentation" class="md-header__button md-logo" aria-label="MolDocker Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            MolDocker Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Molecule Preparation
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="index.html" title="MolDocker Documentation" class="md-nav__button md-logo" aria-label="MolDocker Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    MolDocker Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="installation.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Installation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="getting_started.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Getting Started
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Molecule Preparation
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="molecule_preparation.html" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Molecule Preparation
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#input-molecules" class="md-nav__link">
+    <span class="md-ellipsis">
+      Input Molecules
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Input Molecules">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#local-import" class="md-nav__link">
+    <span class="md-ellipsis">
+      Local Import
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#database-search" class="md-nav__link">
+    <span class="md-ellipsis">
+      Database Search
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#draw-chemicals" class="md-nav__link">
+    <span class="md-ellipsis">
+      Draw Chemicals
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#compare-molecules" class="md-nav__link">
+    <span class="md-ellipsis">
+      Compare Molecules
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sample-molecules" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sample Molecules
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#filter-molecules" class="md-nav__link">
+    <span class="md-ellipsis">
+      Filter Molecules
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Filter Molecules">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#molecular-properties" class="md-nav__link">
+    <span class="md-ellipsis">
+      Molecular Properties
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#substructures" class="md-nav__link">
+    <span class="md-ellipsis">
+      Substructures
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#convert-molecules" class="md-nav__link">
+    <span class="md-ellipsis">
+      Convert Molecules
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="protein_preparation_and_docking.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Protein Preparation & Docking
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="result_analysis.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Result Analysis
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="general_utilities.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    General Utilities
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#input-molecules" class="md-nav__link">
+    <span class="md-ellipsis">
+      Input Molecules
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Input Molecules">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#local-import" class="md-nav__link">
+    <span class="md-ellipsis">
+      Local Import
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#database-search" class="md-nav__link">
+    <span class="md-ellipsis">
+      Database Search
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#draw-chemicals" class="md-nav__link">
+    <span class="md-ellipsis">
+      Draw Chemicals
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#compare-molecules" class="md-nav__link">
+    <span class="md-ellipsis">
+      Compare Molecules
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sample-molecules" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sample Molecules
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#filter-molecules" class="md-nav__link">
+    <span class="md-ellipsis">
+      Filter Molecules
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Filter Molecules">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#molecular-properties" class="md-nav__link">
+    <span class="md-ellipsis">
+      Molecular Properties
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#substructures" class="md-nav__link">
+    <span class="md-ellipsis">
+      Substructures
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#convert-molecules" class="md-nav__link">
+    <span class="md-ellipsis">
+      Convert Molecules
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="molecule-preparation">Molecule Preparation<a class="headerlink" href="#molecule-preparation" title="Permanent link">&para;</a></h1>
+<p>The <strong>Converter</strong> module is the main tool for molecule preparation. It can <strong>import, download, draw, compare, sample, filter, and convert</strong> input molecules.</p>
+<h2 id="input-molecules"><strong>Input Molecules</strong><a class="headerlink" href="#input-molecules" title="Permanent link">&para;</a></h2>
+<p>The Converter offers three methods to input molecules: <strong>Local Import</strong>, <strong>Database Search</strong>, and <strong>Draw Chemicals</strong>.</p>
+<h3 id="local-import"><strong>Local Import</strong><a class="headerlink" href="#local-import" title="Permanent link">&para;</a></h3>
+<p>The Converter can import and read various chemical formats locally, including:</p>
+<ul>
+<li>SDF</li>
+<li>MOL</li>
+<li>MOL2</li>
+<li>PDB<sup>✝</sup></li>
+<li>PDBQT<sup>*</sup></li>
+<li>SMI (SMILES) <sup>^</sup></li>
+<li>MRV</li>
+<li>XYZ<sup>✝</sup></li>
+</ul>
+<p><sub><sup>✝</sup> These formats often include only coordinates and lack bond and stereochemistry information, so they are not recommended.</sub><br>
+<sub><sup>*</sup> Can only process Meeko-generated PDBQT.</sub><br>
+<sub><sup>^</sup>SMI is not a universal format, so Converter can only read SMI format generated by MolDocker. MolDocker SMI format is a space-separated tabular file with the first and second column representing SMILES the name of said molecule, respectively.</sub></p>
+<p><img alt="Converter Overview" src="images/converter/converter_overview.png" /></p>
+<p>Users can select chemical files directly or the directory containing the desired molecular files using the <strong>Browse Files</strong> or <strong>Browse Dir.</strong> button, respectively. Files and directories can also be <strong>dragged &amp; dropped</strong> into the list.</p>
+<p>In addition to these chemical files, some databases store SMILES or InChI strings inside a CSV or TSV file. To read these formats, click the <strong>Read Table</strong> button to select the tabular file.</p>
+<p><img alt="Converter Table" src="images/converter/converter_table.png" /></p>
+<p>After selecting the CSV/TSV file, a dialog will pop up asking the user to input the column <strong>separator</strong>. The default separator for CSV files is <strong>, (comma)</strong>, while <strong>\t (tab)</strong> is the default separator for TSV files. Some databases, such as ChEMBL, use <strong>; (semicolon)</strong> as their CSV separator. If the preview table does not look as expected, check the tabular file manually for the correct separator.</p>
+<h3 id="database-search"><strong>Database Search</strong><a class="headerlink" href="#database-search" title="Permanent link">&para;</a></h3>
+<p>The Converter can download molecules from various databases using their respective IDs. By selecting <strong>Convert Utilities → Search Databases</strong>, users can open the database search dialog. Currently, MolDocker supports querying the following databases:</p>
+<ul>
+<li>CCD (Chemical Component Dictionary)</li>
+<li>BIRD (Biologically Interesting Molecule Reference Dictionary)</li>
+<li>PubChem</li>
+<li>ChEMBL</li>
+<li>ChEBI</li>
+<li>DrugBank</li>
+<li>ZINC22</li>
+<li>NPASS</li>
+<li>SuperNatural 3.0</li>
+</ul>
+<p><img alt="Database Overview" src="images/converter/database_overview.png" /></p>
+<p>Users can input database IDs into the left textbox and press <strong>Add</strong> to include them in the table on the right. To specify which database the IDs belong to, select the corresponding database name in the dropdown menu above the textbox. If <strong>Automatic</strong> is selected, MolDocker will determine the target database based on the ID's syntax. Characters other than <strong>alphabet, number, _ (underscore)</strong>, and <strong>: (colon)</strong> are interpreted as separators for IDs. To remove molecules, select the relevant row and press <strong>backspace</strong>.<br>
+For the example figure above, the IDs <strong>NPC33124</strong>, <strong>FU9</strong>, <strong>1234</strong>, <strong>KLO</strong>, and <strong>ZINC1499502</strong> will be added to the table.</p>
+<p>Users can modify the <strong>Database</strong>, <strong>ID</strong>, and <strong>Name</strong> of each molecule by double-clicking to edit the cells in the table. However, the <strong>Name</strong> must be unique; MolDocker will throw an error if a duplicate name is found.</p>
+<p><img alt="Database Searched" src="images/converter/database_searched.png" /></p>
+<p>Press <strong>Search</strong> to start the search for molecules with the <strong>Search</strong> checkbox ticked. Found molecules are marked as <span style="color: #4CAF50;"><strong>✓</strong></span>, and not found molecules are marked as <span style="color: #E57373;"><strong>X</strong></span> in the <strong>Found</strong> column. The <strong>Database</strong> and <strong>ID</strong> of found molecules are locked and cannot be changed. Molecules marked as not found likely correspond to non-existent IDs, even if the syntax is correct. Press <strong>Ok</strong> to pass the molecules back to the Converter.</p>
+<h3 id="draw-chemicals"><strong>Draw Chemicals</strong><a class="headerlink" href="#draw-chemicals" title="Permanent link">&para;</a></h3>
+<p>The Converter integrates with <a href="https://github.com/EBjerrum/rdeditor">rdeditor</a>, allowing users to draw and design small molecules within MolDocker. Select <strong>Convert Utilities → Draw Chemicals</strong> to create your own molecules.</p>
+<p><img alt="Draw Display" src="images/converter/rdeditor_overview.png" /></p>
+<p>Molecule names can be specified in the <strong>Name</strong> section, with the <strong>SMILES</strong> field displaying the current SMILES string. Users can also paste desired molecules by entering their SMILES string into the <strong>SMILES</strong> field. Press <strong>Ok</strong> to send the molecules back to the Converter for further processing.</p>
+<h2 id="compare-molecules"><strong>Compare Molecules</strong><a class="headerlink" href="#compare-molecules" title="Permanent link">&para;</a></h2>
+<p>The Converter can <strong>compare</strong> the similarity of input molecules against local databases created by the user. These databases can be generated in MolDocker by saving molecules in the <strong>.mddb (MolDocker Database)</strong> format.</p>
+<p>To compare input molecules against local databases, press the <strong>Filters</strong> button to open the Filter popup dialog.</p>
+<p><img alt="Filter Overview" src="images/converter/converter_filter_overview.png" /></p>
+<p>In the <strong>Database Similarity</strong> section (bottom right), press <strong>Add</strong> or <strong>Drag &amp; Drop</strong> local .mddb databases into the list. Users must specify a <strong>Similarity Range</strong> to <strong>include/exclude</strong> matched molecules. For example, a range of <strong>0.6~0.9</strong> with <strong>include</strong> will <em>retain</em> molecules with 0.6 ≤ <em>Max_Sim</em> ≤ 0.9, where <em>Max_Sim</em> is the maximum similarity of an input molecule against all molecules in the databases. Selecting <strong>exclude</strong> removes molecules matching this range.</p>
+<p>For more details on configuring similarity metrics and fingerprinting methods, refer to the <strong>Similarities and Fingerprints</strong> section in <strong>General Utilities</strong>.</p>
+<h2 id="sample-molecules"><strong>Sample Molecules</strong><a class="headerlink" href="#sample-molecules" title="Permanent link">&para;</a></h2>
+<p>The Converter offers two sampling methods: <strong>random sampling</strong> and <strong>diverse sampling</strong>.</p>
+<p>To sample molecules, press the <strong>Filters</strong> button to open the Filter popup dialog.</p>
+<p><img alt="Filter Overview" src="images/converter/converter_filter_overview.png" /></p>
+<p>In the <strong>Sampling</strong> section (top right), enable <strong>random or diverse sampling</strong> by selecting the desired method in the dropdown menu. Diverse sampling is implemented using RDKit's <strong>MaxMinPicker</strong>. Users must also provide a random number generator seed (<strong>Seed</strong>) and the number of samples (<strong>Num</strong>).</p>
+<h2 id="filter-molecules"><strong>Filter Molecules</strong><a class="headerlink" href="#filter-molecules" title="Permanent link">&para;</a></h2>
+<p>The Converter can filter molecules based on <strong>molecular properties</strong> and <strong>substructures</strong>.</p>
+<h3 id="molecular-properties"><strong>Molecular Properties</strong><a class="headerlink" href="#molecular-properties" title="Permanent link">&para;</a></h3>
+<p>Available property filters include:</p>
+<ul>
+<li>Molecular weight</li>
+<li>Hydrogen bond donors</li>
+<li>Hydrogen bond acceptors</li>
+<li>LogP (RDKit SLogP)</li>
+<li>Topological polar surface area</li>
+<li>Rotatable bonds</li>
+<li>Number of rings</li>
+<li>Formal charge</li>
+<li>Number of heavy atoms</li>
+<li>Molar refractivity</li>
+<li>Number of atoms</li>
+<li>Quantitative estimate of drug-likeness (QED)</li>
+</ul>
+<h3 id="substructures"><strong>Substructures</strong><a class="headerlink" href="#substructures" title="Permanent link">&para;</a></h3>
+<p>Predefined substructures include:</p>
+<ul>
+<li>PAINS</li>
+<li>BRENK</li>
+<li>NIH</li>
+<li>ZINC</li>
+<li>CHEMBL subsets (e.g., BMS, Dundee, Glaxo)</li>
+<li>Custom substructures (SMARTS strings)</li>
+</ul>
+<p>To apply filters, press the <strong>Filters</strong> button to open the dialog. Users can check the desired filters and choose <strong>Ignore</strong>, <strong>Partial</strong>, or <strong>Exact</strong> matching. Partial matches can be adjusted using the <strong>Partial Filter Threshold</strong>, which specifies the minimum number of matching filters required.</p>
+<p>MolDocker also includes predefined property filters, such as Lipinski's Rule of Five, Veber's Filter, Egan's Filter, and more.</p>
+<p>Filters are processed independently and sequentially, starting with property filters and then substructure filters.</p>
+<h2 id="convert-molecules"><strong>Convert Molecules</strong><a class="headerlink" href="#convert-molecules" title="Permanent link">&para;</a></h2>
+<p>The Converter supports conversion to various formats, including:</p>
+<ul>
+<li><strong>PDBQT</strong>: For <em>AutoDock VINA</em>, <em>QuickVINA 2</em>, and others.</li>
+<li><strong>SDF</strong>: Common format.</li>
+<li><strong>MOL</strong>: Common format.</li>
+<li><strong>MOL2</strong>: For <em>LeDock</em>.</li>
+<li><strong>XYZ</strong>: Common format.</li>
+<li><strong>SMI</strong>: SMILES format.</li>
+<li><strong>CSV</strong>: For <em>DiffDock</em>.</li>
+<li><strong>PNG</strong>: Image format.</li>
+<li><strong>MDDB</strong>: For MolDocker databases.</li>
+</ul>
+<p><img alt="Converter Overview" src="images/converter/converter_overview.png" /></p>
+<p>MolDocker saves molecules as individual files, except for <strong>SDF</strong>, <strong>SMI</strong>, <strong>CSV</strong>, and <strong>MDDB</strong>, which can be saved as single files. File names are based on molecule names, with numbering to avoid duplicates.</p>
+<p>Users can also specify custom naming schemes for SDF files by selecting <strong>Convert Utilities → SDF Props as Name</strong> and inputting property names to overwrite default names.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": ".", "features": [], "search": "assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="assets/javascripts/bundle.83f73b43.min.js"></script>
+      
+    
+  </body>
+</html>

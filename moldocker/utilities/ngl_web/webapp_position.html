@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Protein Structure Viewer</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+  <link rel="stylesheet" href="css/font-awesome.min.css" />
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="subresource" href="css/light.css" />
+  <link rel="subresource" href="css/dark.css" />
+</head>
+<body>
+  <!-- NGL -->
+  <script src="js/ngl.js"></script>
+
+  <!-- UI -->
+  <script src="js/lib/signals.min.js"></script>
+  <script src="js/lib/tether.min.js"></script>
+  <script src="js/lib/colorpicker.min.js"></script>
+  <script src="js/ui/ui.js"></script>
+  <script src="js/ui/ui.extra.js"></script>
+  <script src="js/ui/ui.ngl.js"></script>
+  <script src="js/gui.js"></script>
+  <script src="qrc:///qtwebchannel/qwebchannel.js"></script>
+
+  <script>
+    const originalWarn = console.warn;
+    console.warn = function(message) {
+      if (message.includes('THREE.WebGLRenderer: The property .useLegacyLights has been deprecated')) {
+        return;
+      }
+      originalWarn.apply(console, arguments);
+    };
+
+    function sendCoordinateToPython(coordinates) {
+        JSON.stringify(coordinates);
+        window.pywebchannel.receiveCoordinates(coordinates);
+    }
+
+    new QWebChannel(qt.webChannelTransport, function(channel) {
+        window.pywebchannel = channel.objects.pywebchannel;
+    });
+  </script>
+  
+  <script>
+    NGL.cssDirectory = "css/"
+    NGL.documentationUrl = "../build/docs/"
+    NGL.examplesListUrl = "../build/scriptsList.json"
+    NGL.examplesScriptUrl = "./scripts/"
+
+    // Datasources
+    NGL.DatasourceRegistry.add("data", new NGL.StaticDatasource("../data/"))
+    var mdsrv = NGL.getQuery("mdsrv")
+    if (mdsrv) {
+      var mdsrvDatasource = new NGL.MdsrvDatasource(mdsrv)
+      NGL.DatasourceRegistry.add("file", mdsrvDatasource)
+      NGL.setListingDatasource(mdsrvDatasource)
+      NGL.setTrajectoryDatasource(mdsrvDatasource)
+    }
+    
+    var stage;
+    document.addEventListener("DOMContentLoaded", function () {
+      stage = new NGL.Stage()
+      var sphereShapeComp;
+      var boxShapeComp;
+      var boxShapeBoundingBoxComp;
+      var axesShapeComp;
+      var customBallStickRepresentation = null;
+      var firstTimeLoad = true;
+      var startMovingSphere = false;
+      var initialPosition = null;
+      var initialMousePos = null;
+      var selectionHighlightRepresentation = null;
+
+      function showSideChain(position) {
+        function checkAndAddRepresentation() {
+          let foundRepresentation = false;
+
+          if (stage.compList.length > 0) {
+            for (let i = 0; i < stage.compList.length; i++) {
+              const component = stage.compList[i];
+
+              // Check if the component type is 'structure' which typically indicates a protein
+              if (component.type === 'structure') {
+                customBallStickRepresentation = component.addRepresentation("ball+stick", { sele: position, 'multipleBond': 'symmetric' , 'roughness': 0.5 });
+                foundRepresentation = true;
+                break; // Exit the loop once the representation is successfully added
+              }
+            }
+
+            if (!foundRepresentation) {
+              // Retry after a short delay if no suitable structure was found
+              setTimeout(checkAndAddRepresentation, 100); // Check every 100ms
+            }
+          } else {
+            // Stage is not ready, check again after a short delay
+            setTimeout(checkAndAddRepresentation, 100); // Check every 100ms
+          }
+        }
+
+        if (!customBallStickRepresentation) {
+          checkAndAddRepresentation();
+        } else {
+          customBallStickRepresentation.setSelection(position);
+        }
+      }
+
+      function reorient() {
+        if (axesShapeComp) {
+          for (let i = 0; i < stage.compList.length; i++) {
+            const component = stage.compList[i];
+            if (component.type === 'structure') {
+              component.autoView(500);
+              break;
+            }
+          }
+        }
+      }
+
+      function createSphere(position, color, radius) {
+        if (sphereShapeComp) {
+          stage.removeComponent(sphereShapeComp);
+        }
+
+        var sphereShape = new NGL.Shape("Center");
+        sphereShape.addSphere(position, color, radius, "Center");
+        sphereShapeComp = stage.addComponentFromObject(sphereShape);
+        sphereShapeComp.addRepresentation("buffer");
+      }
+
+      function updateHighlight(position) {
+        console.log(position);
+        selectionHighlightRepresentation.setSelection( position );
+      }
+
+      function createBox(position, color, X, Y, Z, opacity, x_min, x_max, y_min, y_max, z_min, z_max) {
+        if (boxShapeComp) {
+          stage.removeComponent(boxShapeComp);
+          stage.removeComponent(boxShapeBoundingBoxComp);
+        }
+        var boxShape = new NGL.Shape("Box");
+        boxShape.addBox(position, color, X, [ 0, Y, 0 ], [ 0, 0, Z ], 'Box')
+
+        var edges = [
+              // X
+              [x_min, y_min, z_min], [x_max, y_min, z_min], // X
+              [x_min, y_min, z_max], [x_max, y_min, z_max], // X
+              [x_min, y_max, z_min], [x_max, y_max, z_min], // X
+              [x_min, y_max, z_max], [x_max, y_max, z_max], // X
+              // Y
+              [x_max, y_min, z_min], [x_max, y_max, z_min], // Y
+              [x_min, y_min, z_min], [x_min, y_max, z_min], // Y
+              [x_max, y_min, z_max], [x_max, y_max, z_max], // Y
+              [x_min, y_min, z_max], [x_min, y_max, z_max], // Y
+              // Z
+              [x_min, y_min, z_min], [x_min, y_min, z_max], // Z
+              [x_max, y_min, z_min], [x_max, y_min, z_max], // Z
+              [x_max, y_max, z_min], [x_max, y_max, z_max], // Z
+              [x_min, y_max, z_min], [x_min, y_max, z_max], // Z
+          ];
+          
+          var boxBoundingBox = new NGL.Shape("BBB");
+          // Draw the bounding box edges
+          for (var i = 0; i < edges.length / 3; i += 2) {
+            boxBoundingBox.addArrow(edges[i], edges[i+1], [0.9 , 0.45, 0.45], 0.1); // Color: Red
+          }
+          for (var i = 8; i < 8 + edges.length / 3; i += 2) {
+            boxBoundingBox.addArrow(edges[i], edges[i+1], [0.3 , 0.69, 0.31], 0.1); // Color: Green
+          }
+          for (var i = 16; i < 16 + edges.length / 3; i += 2) {
+            boxBoundingBox.addArrow(edges[i], edges[i+1], [0.26, 0.65, 0.96], 0.1); // Color: Blue
+          }
+        boxShapeComp = stage.addComponentFromObject(boxShape);
+        boxShapeBoundingBoxComp = stage.addComponentFromObject(boxBoundingBox);
+        boxShapeComp.addRepresentation("buffer", { 'opacity': opacity });
+        boxShapeBoundingBoxComp.addRepresentation("buffer");
+      }
+
+      function rmSphere() {
+        if (sphereShapeComp) {
+          stage.removeComponent(sphereShapeComp);
+        }
+      }
+
+      function setCenterVisibility(visibility) {
+        var vis = true;
+        if (visibility == 'False') {
+          var vis = false;
+        }
+        if (sphereShapeComp) {
+          sphereShapeComp.setVisibility(vis);
+        }
+      }
+
+      function rmBox() {
+        if (boxShapeComp) {
+          stage.removeComponent(boxShapeComp);
+          stage.removeComponent(boxShapeBoundingBoxComp);
+        }
+      }
+
+      function setBoxVisibility(visibility) {
+        var vis = true;
+        if (visibility == 'False') {
+          var vis = false;
+        }
+        if (boxShapeComp) {
+          boxShapeComp.setVisibility(vis);
+          boxShapeBoundingBoxComp.setVisibility(vis);
+        }
+      }
+
+      function retrievePosition(pickingProxy) {
+        var atom = pickingProxy.atom || pickingProxy.closestBondAtom;
+        var x = atom.positionToArray()[0].toFixed(3);
+        var y = atom.positionToArray()[1].toFixed(3);
+        var z = atom.positionToArray()[2].toFixed(3);
+        var name = atom.qualifiedName();
+        return { x: x, y: y, z: z, name: name }
+      }
+
+      function loadCustomFile(path) {
+        stage.loadFile(path, {defaultRepresentation: true});
+      }
+
+      function loadCustomPDBQTString(fileContent, scheme) {
+        stage.loadFile( new Blob([fileContent], {type: 'text/plain'}), { ext:'pdbqt', defaultRepresentation: false } ).then(function(component) {
+          component.addRepresentation("cartoon", { 
+            roughness: 0.5, 
+            smoothSheet: true, 
+            colorScheme: scheme, 
+            colorReverse: true,
+            subdiv: 10,});
+          
+          selectionHighlightRepresentation = component.addRepresentation("cartoon", { 
+            roughness: 0.5, 
+            smoothSheet: true, 
+            colorScheme: 'uniform', 
+            colorReverse: true,
+            subdiv: 10,
+            colorValue: '#1BFC06',
+            sele: 'none'});
+
+          var box = component.structure.getBoundingBox();
+          var shape = new NGL.Shape("boundingBox");
+          var min = box.min;
+          var max = box.max;
+          
+          var edges = [
+              // X
+              [min.x, min.y, min.z], [max.x, min.y, min.z], // X
+              [min.x, min.y, max.z], [max.x, min.y, max.z], // X
+              [min.x, max.y, min.z], [max.x, max.y, min.z], // X
+              [min.x, max.y, max.z], [max.x, max.y, max.z], // X
+              // Y
+              [max.x, min.y, min.z], [max.x, max.y, min.z], // Y
+              [min.x, min.y, min.z], [min.x, max.y, min.z], // Y
+              [max.x, min.y, max.z], [max.x, max.y, max.z], // Y
+              [min.x, min.y, max.z], [min.x, max.y, max.z], // Y
+              // Z
+              [min.x, min.y, min.z], [min.x, min.y, max.z], // Z
+              [max.x, min.y, min.z], [max.x, min.y, max.z], // Z
+              [max.x, max.y, min.z], [max.x, max.y, max.z], // Z
+              [min.x, max.y, min.z], [min.x, max.y, max.z], // Z
+          ];
+          
+          // Draw the bounding box edges
+          for (var i = 0; i < edges.length / 3; i += 2) {
+            shape.addArrow(edges[i], edges[i+1], [0.9 , 0.45, 0.45], 0.1); // Color: Red
+          }
+          for (var i = 8; i < 8 + edges.length / 3; i += 2) {
+            shape.addArrow(edges[i], edges[i+1], [0.3 , 0.69, 0.31], 0.1); // Color: Green
+          }
+          for (var i = 16; i < 16 + edges.length / 3; i += 2) {
+            shape.addArrow(edges[i], edges[i+1], [0.26, 0.65, 0.96], 0.1); // Color: Blue
+          }
+          
+          // Add the shape to the stage
+          axesShapeComp = stage.addComponentFromObject(shape);
+          axesShapeComp.addRepresentation("buffer", { disablePicking: true, opacity: 0.5 });
+          // customBallStickRepresentation = component.addRepresentation("ball+stick", { sele: 'none', 'multipleBond': 'symmetric' , 'roughness': 0.8 });
+          if ( firstTimeLoad == true ) {
+            component.autoView();
+            firstTimeLoad = false;
+          };
+        });
+      }
+
+      function clearAllStageComponents(path) {
+        stage.removeAllComponents();
+        customBallStickRepresentation = null;
+        selectionHighlightRepresentation = null;
+      }
+
+      window.createSphere = createSphere;
+      window.createBox = createBox;
+      window.rmSphere = rmSphere;
+      window.rmBox = rmBox;
+      window.loadCustomFile = loadCustomFile;
+      window.loadCustomPDBQTString = loadCustomPDBQTString;
+      window.clearAllStageComponents = clearAllStageComponents;
+      window.showSideChain = showSideChain;
+      window.setBoxVisibility = setBoxVisibility;
+      window.setCenterVisibility = setCenterVisibility;
+      window.reorient = reorient;
+      window.updateHighlight = updateHighlight;
+
+      var tooltip = document.createElement('div')
+      Object.assign(tooltip.style, {
+        display: 'none',
+        position: 'fixed',
+        zIndex: 10,
+        pointerEvents: 'none',
+        backgroundColor: 'rgba( 0, 0, 0, 0.6 )',
+        color: 'lightgrey',
+        padding: '8px',
+        fontFamily: 'sans-serif'
+      })
+      document.body.appendChild(tooltip)
+
+      stage.mouseControls.remove('hoverPick')
+      stage.mouseControls.remove('clickPick-left')
+
+      stage.mouseControls.add('hoverPick', function (stage, pickingProxy) {
+        if (pickingProxy && (pickingProxy.atom || pickingProxy.bond)) {
+          var atom = pickingProxy.atom || pickingProxy.closestBondAtom;
+          var mp = pickingProxy.mouse.position;
+          var x = atom.positionToArray()[0].toFixed(3);
+          var y = atom.positionToArray()[1].toFixed(3);
+          var z = atom.positionToArray()[2].toFixed(3);
+          tooltip.innerText = `${atom.qualifiedName()}
+          X: ${x}
+          Y: ${y}
+          Z: ${z}`
+          tooltip.style.bottom = window.innerHeight - mp.y + 3 + 'px';
+          tooltip.style.left = mp.x + 3 + 'px';
+          tooltip.style.display = 'block';
+        } else {
+          tooltip.style.display = 'none'
+        }
+      })
+
+      // stage.mouseControls.add('hover', function (stage, x, y) {
+      //   if (startMovingSphere) {
+      //     let vector = new NGL.Vector3();
+      //     vector.copy(initialPosition);
+      //     vector.project(stage.viewer.camera);
+      //     console.log( vector.x, vector.y, vector.z )
+
+      //     let zoomFactor = stage.viewer.camera.position.distanceTo(sphereShapeComp.position) / 2;
+      //     let currentMousePos = new NGL.Vector2(
+      //       (x / window.innerWidth ) * 2 - 1,
+      //      -(y / window.innerHeight) * 2 + 1);
+
+      //     let deltaX = currentMousePos.x - initialMousePos.x;
+      //     let deltaY = currentMousePos.y - initialMousePos.y;
+      //     let newPosition = initialPosition.clone();
+      //     newPosition.x -= deltaX * zoomFactor;
+      //     newPosition.y -= deltaY * zoomFactor;
+      //     console.log( newPosition.x, newPosition.y );
+
+      //     sphereShapeComp.setPosition([newPosition.x, newPosition.y, newPosition.z]);
+      //   }
+      // })
+
+      stage.mouseControls.add('clickPick-left', function (stage, pickingProxy) {
+        if (pickingProxy && (pickingProxy.atom || pickingProxy.bond)) {
+          var atom = pickingProxy.atom || pickingProxy.closestBondAtom
+          sendCoordinateToPython(retrievePosition(pickingProxy))
+        } else if (pickingProxy && pickingProxy.sphere) {
+          startMovingSphere = true;
+          initialPosition = sphereShapeComp.position.clone();
+          initialMousePos = new NGL.Vector2(
+            (pickingProxy.canvasPosition.x / window.innerWidth ) * 2 - 1,
+           -(pickingProxy.canvasPosition.y / window.innerHeight) * 2 + 1
+        );
+        }
+      })
+
+      var script = NGL.getQuery("script")
+      if (script) stage.loadScript("./scripts/" + script + ".js")
+      
+      window.getCenterOfStructure = function() {
+        if (stage.compList.length > 0) {
+          var component = stage.compList[0];
+          var structure = component.structure;
+          var center = structure.getCenter();
+          return center.toArray();
+        }
+        return null;
+      };
+    })
+  </script>
+</body>
+</html>

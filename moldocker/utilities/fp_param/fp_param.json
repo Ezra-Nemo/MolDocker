@@ -1,0 +1,14 @@
+{
+    "method": "RDKit",
+    "params": {
+        "fpSize": 2048,
+        "minPath": 1,
+        "maxPath": 7,
+        "useHs": true,
+        "branchedPaths": true,
+        "useBondOrder": true,
+        "countSimulation": false,
+        "numBitsPerFeature": 2
+    },
+    "sim": "Tanimoto"
+}

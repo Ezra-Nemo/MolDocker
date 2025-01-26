@@ -1,0 +1,730 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="protein_preparation_and_docking.html">
+      
+      
+        <link rel="next" href="general_utilities.html">
+      
+      
+      <link rel="icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.46">
+    
+    
+      
+        <title>Result Analysis - MolDocker Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.6f8fc17f.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="css/extra.css">
+    
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="light-blue" data-md-color-accent="indogo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#result-analysis" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="index.html" title="MolDocker Documentation" class="md-header__button md-logo" aria-label="MolDocker Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            MolDocker Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Result Analysis
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="index.html" title="MolDocker Documentation" class="md-nav__button md-logo" aria-label="MolDocker Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    MolDocker Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="installation.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Installation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="getting_started.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Getting Started
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="molecule_preparation.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Molecule Preparation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="protein_preparation_and_docking.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Protein Preparation & Docking
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Result Analysis
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="result_analysis.html" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Result Analysis
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#table" class="md-nav__link">
+    <span class="md-ellipsis">
+      Table
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Structure
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#figure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Figure
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#shopper" class="md-nav__link">
+    <span class="md-ellipsis">
+      Shopper
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Shopper">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#database-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      Database Options
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#query-molecules" class="md-nav__link">
+    <span class="md-ellipsis">
+      Query Molecules
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#search-parameters-and-input" class="md-nav__link">
+    <span class="md-ellipsis">
+      Search Parameters and Input
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#search-results" class="md-nav__link">
+    <span class="md-ellipsis">
+      Search Results
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="general_utilities.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    General Utilities
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#table" class="md-nav__link">
+    <span class="md-ellipsis">
+      Table
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Structure
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#figure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Figure
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#shopper" class="md-nav__link">
+    <span class="md-ellipsis">
+      Shopper
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Shopper">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#database-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      Database Options
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#query-molecules" class="md-nav__link">
+    <span class="md-ellipsis">
+      Query Molecules
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#search-parameters-and-input" class="md-nav__link">
+    <span class="md-ellipsis">
+      Search Parameters and Input
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#search-results" class="md-nav__link">
+    <span class="md-ellipsis">
+      Search Results
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="result-analysis">Result Analysis<a class="headerlink" href="#result-analysis" title="Permanent link">&para;</a></h1>
+<p>The <strong>Table</strong>, <strong>Structure</strong>, <strong>Figure</strong>, and <strong>Shopper</strong> modules are the main tools for result analysis.</p>
+<h2 id="table"><strong>Table</strong><a class="headerlink" href="#table" title="Permanent link">&para;</a></h2>
+<p>To load data into the Table module, select the docked output directory containing the docked files and press <strong>View</strong> to read and load the results. By default, the Table module analyzes molecular properties for each docked molecule and loads only the first-ranked result output by each docking program. To adjust these options, uncheck the relevant checkboxes.</p>
+<p><img alt="Table Overview" src="images/table/table_overview.png" /></p>
+<p>By default, Table filters the results to display only the top 1% of docked results. To modify the filters or add/remove columns, click <strong>Filter</strong> to open the table filter dialog.</p>
+<p><img alt="Table Filter" src="images/table/table_filter.png" /></p>
+<p>The filter layout is similar to that of the Converter module but uses a simpler logic: all filters are either <strong>AND</strong> or <strong>OR</strong> operations. Most columns are filtered by value, except for the <em>Name</em> column, which accepts case-sensitive Python regex.</p>
+<p>Users can save the filtered or full table in CSV, TSV, or XLSX formats or export filtered ligands to individual SDF files by clicking <strong>Save</strong> and selecting the desired option. To save docked results in a refinement-ready format, choose the <strong>Refine Format</strong> option, then select either <em>Directory</em> for local refinement or <em>ZIP</em> for cloud-based refinement.</p>
+<h2 id="structure"><strong>Structure</strong><a class="headerlink" href="#structure" title="Permanent link">&para;</a></h2>
+<p>The Structure module is linked to the Table module and displays protein-ligand complexes filtered by Table. If the filtered table contains fewer than 500 rows, the Structure module updates automatically. Otherwise, users need to click <strong>Update</strong> to refresh the Structure module manually.</p>
+<p><img alt="Structure Overview" src="images/structure/structure_overview.png" /></p>
+<p>In the top-left corner, a tree view displays the docked molecules. Checking a molecule's <strong>checkbox</strong> displays its structure in the viewer on the right. The interactions between the ligand and protein are profiled and shown in the structure and in the bottom-left toolbox. Interaction types are color-coded: green indicates the interaction exists, while red indicates it does not.</p>
+<p>To save a structure image, select <strong>File → Export Image</strong> in the viewer. An image named "Screenshot" will be saved in the "Download" directory. To save the PDB structures of the protein, ligand, complex, and interaction profiles (CSV format), click <strong>Save Selected</strong> and choose a target directory to save the files.</p>
+<h2 id="figure"><strong>Figure</strong><a class="headerlink" href="#figure" title="Permanent link">&para;</a></h2>
+<p>The Figure module provides an overview of numerical data related to docking, such as scores and molecular properties. Figure has its own filter, independent of the Table module. By default, it filters data to display docking scores within the range of median ± 3×IQR.</p>
+<p><img alt="Figure Overview" src="images/figure/figure_overview.png" /></p>
+<p>The Figure module offers three visualization modes:</p>
+<ul>
+<li><strong>Correlation</strong>: Displays a heatmap of pairwise Pearson correlation coefficients between datasets. This mode is shown when both X and Y axes are empty.</li>
+<li><strong>Distribution</strong>: Displays the distribution (histogram, KDE, and rug) of a single dataset. This mode is shown when either the X or Y axis is selected.</li>
+<li><strong>Marginal</strong>: Displays a marginal plot for two datasets. This mode is shown when both X and Y axes are selected. An additional <strong>Color</strong> option allows visualization of a third dataset.</li>
+</ul>
+<p>To save figures, click the <strong>Camera symbol</strong> in the top-right corner of the figure toolbox. The figure will be saved to the "Download" directory on your local PC.</p>
+<h2 id="shopper"><strong>Shopper</strong><a class="headerlink" href="#shopper" title="Permanent link">&para;</a></h2>
+<p>The Shopper module is semi-independent and does not require docked results. However, it updates automatically with filtered docked molecules once they are loaded in Table.</p>
+<p><img alt="Shopper Overview" src="images/shopper/shopper_overview.png" /></p>
+<h3 id="database-options"><strong>Database Options</strong><a class="headerlink" href="#database-options" title="Permanent link">&para;</a></h3>
+<p>Users can choose from three database options: <strong>ZINC22</strong>, <strong>PubChem</strong>, or <strong>Local Database</strong> (MDDB format). Each has its pros and cons:</p>
+<ul>
+<li>
+<p><strong>ZINC22</strong>:</p>
+<ul>
+<li><strong>Pros</strong>:<ul>
+<li>Large molecule database with many vendors.</li>
+<li>Does not use local computational resources.</li>
+</ul>
+</li>
+<li><strong>Cons</strong>:<ul>
+<li>Includes non-vendor information (e.g., ChEMBL).</li>
+<li>Some vendor data may be outdated.</li>
+<li>Molecule queries are online, which may pose security risks for sensitive molecules.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>PubChem</strong>:</p>
+<ul>
+<li><strong>Pros</strong>:<ul>
+<li>Focused on vendor information.</li>
+<li>Common vendor data is up-to-date.</li>
+<li>Does not use local computational resources.</li>
+</ul>
+</li>
+<li><strong>Cons</strong>:<ul>
+<li>Smaller database with fewer vendors compared to ZINC22.</li>
+<li>Molecule queries are online, with potential security risks for sensitive molecules.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Local Database (MDDB format)</strong>:</p>
+<ul>
+<li><strong>Pros</strong>:<ul>
+<li>Searches are performed locally, ensuring higher security.</li>
+<li>Supports custom, user-tailored databases.</li>
+</ul>
+</li>
+<li><strong>Cons</strong>:<ul>
+<li>Relies on local computational resources for similarity searches.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>Each database has its own dedicated "page," and changes made to one page do not affect others.</p>
+<h3 id="query-molecules"><strong>Query Molecules</strong><a class="headerlink" href="#query-molecules" title="Permanent link">&para;</a></h3>
+<p>In each database page, the top-left section displays the 2D structure of the selected query molecule. Right-clicking this image brings up a menu to save it as a PNG or search it in common vendor/databases. Currently, it includes the following databases/vendors:</p>
+<ul>
+<li>Ambinter</li>
+<li>molport</li>
+<li>eMolecules</li>
+<li>ChemExper</li>
+<li>Sigma Aldrich</li>
+<li>ChemSpider</li>
+<li>Chemspace</li>
+<li>ZINC22 &amp; ZINC20</li>
+</ul>
+<p>This <strong>one-to-one</strong> search queries a single molecule against a specific vendor/database. It provides up-to-date vendor information by directly querying vendor websites. MolDocker automates this process, automatically filling in the search box with molecule information (SMILES or InChI).</p>
+<h3 id="search-parameters-and-input"><strong>Search Parameters and Input</strong><a class="headerlink" href="#search-parameters-and-input" title="Permanent link">&para;</a></h3>
+<p>Below the query molecule image are the <strong>search parameters</strong> and a <strong>Search</strong> button. For <strong>Local Database</strong>, this section also allows users to import local databases by <strong>dragging &amp; dropping</strong> them into the table.</p>
+<p>The bottom-left section contains the <strong>query molecule input list</strong>, which is automatically updated with Table-filtered molecules if docked molecules are loaded. Users can also import non-docked molecules by <strong>dragging &amp; dropping</strong> their files into this list. Supported formats include all non-tabular formats readable by the Converter module. Once the desired molecules are loaded, press the <strong>Search</strong> button to begin searching.</p>
+<p><img alt="Shopper Searched" src="images/shopper/shopper_searched.png" /></p>
+<h3 id="search-results"><strong>Search Results</strong><a class="headerlink" href="#search-results" title="Permanent link">&para;</a></h3>
+<p>The right side of each database page displays search results, including:</p>
+<ul>
+<li>A drop-down list of all matched molecules.</li>
+<li>The name, SMILES, and image of the selected target molecule.</li>
+<li>Similarities and differences in chemical properties between the query and selected target molecule.</li>
+<li>Vendor information and IDs for the selected target molecule.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": ".", "features": [], "search": "assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="assets/javascripts/bundle.83f73b43.min.js"></script>
+      
+    
+  </body>
+</html>

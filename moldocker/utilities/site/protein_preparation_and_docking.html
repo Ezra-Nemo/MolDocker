@@ -1,0 +1,1097 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="molecule_preparation.html">
+      
+      
+        <link rel="next" href="result_analysis.html">
+      
+      
+      <link rel="icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.46">
+    
+    
+      
+        <title>Protein Preparation & Docking - MolDocker Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.6f8fc17f.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="css/extra.css">
+    
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="light-blue" data-md-color-accent="indogo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#protein-preparation-docking" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="index.html" title="MolDocker Documentation" class="md-header__button md-logo" aria-label="MolDocker Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            MolDocker Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Protein Preparation & Docking
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="index.html" title="MolDocker Documentation" class="md-nav__button md-logo" aria-label="MolDocker Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    MolDocker Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="installation.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Installation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="getting_started.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Getting Started
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="molecule_preparation.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Molecule Preparation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Protein Preparation & Docking
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="protein_preparation_and_docking.html" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Protein Preparation & Docking
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#protein-preparation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Protein Preparation
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Protein Preparation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#input-protein" class="md-nav__link">
+    <span class="md-ellipsis">
+      Input Protein
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Input Protein">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#local-import" class="md-nav__link">
+    <span class="md-ellipsis">
+      Local Import
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#database-search" class="md-nav__link">
+    <span class="md-ellipsis">
+      Database Search
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configure-docking-settings" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configure Docking Settings
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configure Docking Settings">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#select-mode" class="md-nav__link">
+    <span class="md-ellipsis">
+      Select Mode
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fpocket-table" class="md-nav__link">
+    <span class="md-ellipsis">
+      FPocket Table
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#heteroatom-table" class="md-nav__link">
+    <span class="md-ellipsis">
+      Heteroatom Table
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#protein-box" class="md-nav__link">
+    <span class="md-ellipsis">
+      Protein Box
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#center-coordinate-box-widths" class="md-nav__link">
+    <span class="md-ellipsis">
+      Center Coordinate &amp; Box Widths
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#others" class="md-nav__link">
+    <span class="md-ellipsis">
+      Others
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#protein-editing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Protein Editing
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#flexible-position" class="md-nav__link">
+    <span class="md-ellipsis">
+      Flexible Position
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#docking" class="md-nav__link">
+    <span class="md-ellipsis">
+      Docking
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Docking">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#local-docking" class="md-nav__link">
+    <span class="md-ellipsis">
+      Local Docking
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Local Docking">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#docking-with-vina-vina-variants-and-ledock" class="md-nav__link">
+    <span class="md-ellipsis">
+      Docking with VINA, VINA Variants, and LeDock
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#post-docking-refinement" class="md-nav__link">
+    <span class="md-ellipsis">
+      Post-Docking Refinement
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cloud-docking" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cloud Docking
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Cloud Docking">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#google-colab" class="md-nav__link">
+    <span class="md-ellipsis">
+      Google Colab
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hugging-face-spaces" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hugging Face Spaces
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#runpod" class="md-nav__link">
+    <span class="md-ellipsis">
+      RunPod
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#website-interaction" class="md-nav__link">
+    <span class="md-ellipsis">
+      Website Interaction
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="result_analysis.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Result Analysis
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="general_utilities.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    General Utilities
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#protein-preparation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Protein Preparation
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Protein Preparation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#input-protein" class="md-nav__link">
+    <span class="md-ellipsis">
+      Input Protein
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Input Protein">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#local-import" class="md-nav__link">
+    <span class="md-ellipsis">
+      Local Import
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#database-search" class="md-nav__link">
+    <span class="md-ellipsis">
+      Database Search
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configure-docking-settings" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configure Docking Settings
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configure Docking Settings">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#select-mode" class="md-nav__link">
+    <span class="md-ellipsis">
+      Select Mode
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fpocket-table" class="md-nav__link">
+    <span class="md-ellipsis">
+      FPocket Table
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#heteroatom-table" class="md-nav__link">
+    <span class="md-ellipsis">
+      Heteroatom Table
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#protein-box" class="md-nav__link">
+    <span class="md-ellipsis">
+      Protein Box
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#center-coordinate-box-widths" class="md-nav__link">
+    <span class="md-ellipsis">
+      Center Coordinate &amp; Box Widths
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#others" class="md-nav__link">
+    <span class="md-ellipsis">
+      Others
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#protein-editing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Protein Editing
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#flexible-position" class="md-nav__link">
+    <span class="md-ellipsis">
+      Flexible Position
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#docking" class="md-nav__link">
+    <span class="md-ellipsis">
+      Docking
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Docking">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#local-docking" class="md-nav__link">
+    <span class="md-ellipsis">
+      Local Docking
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Local Docking">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#docking-with-vina-vina-variants-and-ledock" class="md-nav__link">
+    <span class="md-ellipsis">
+      Docking with VINA, VINA Variants, and LeDock
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#post-docking-refinement" class="md-nav__link">
+    <span class="md-ellipsis">
+      Post-Docking Refinement
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cloud-docking" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cloud Docking
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Cloud Docking">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#google-colab" class="md-nav__link">
+    <span class="md-ellipsis">
+      Google Colab
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hugging-face-spaces" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hugging Face Spaces
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#runpod" class="md-nav__link">
+    <span class="md-ellipsis">
+      RunPod
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#website-interaction" class="md-nav__link">
+    <span class="md-ellipsis">
+      Website Interaction
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="protein-preparation-docking">Protein Preparation &amp; Docking<a class="headerlink" href="#protein-preparation-docking" title="Permanent link">&para;</a></h1>
+<p>The <strong>Docker</strong> module is the main tool for docking preparation. It includes two primary functions: <strong>Protein Preparation</strong> and <strong>Molecular Docking</strong>.</p>
+<h2 id="protein-preparation"><strong>Protein Preparation</strong><a class="headerlink" href="#protein-preparation" title="Permanent link">&para;</a></h2>
+<h3 id="input-protein"><strong>Input Protein</strong><a class="headerlink" href="#input-protein" title="Permanent link">&para;</a></h3>
+<p>Docker provides two methods for inputting protein structures: <strong>Local Import</strong> and <strong>Database Search</strong>.</p>
+<h4 id="local-import"><strong>Local Import</strong><a class="headerlink" href="#local-import" title="Permanent link">&para;</a></h4>
+<p>Supported formats:</p>
+<ul>
+<li>PDB</li>
+<li>CIF</li>
+<li>PDBQT</li>
+</ul>
+<h4 id="database-search"><strong>Database Search</strong><a class="headerlink" href="#database-search" title="Permanent link">&para;</a></h4>
+<p>Supported databases:</p>
+<ul>
+<li><strong>Protein Data Bank (PDB)</strong> using PDB ID</li>
+<li><strong>AlphaFold Database</strong> using UniProt ID</li>
+</ul>
+<p>Before inputting the protein structure, two parameters in the <strong>Dock Utilities</strong> menu bar can be adjusted to influence protein processing:</p>
+<ul>
+<li>
+<p><strong>Fill Gap</strong>: Default is <code>False</code>. If checked, Docker will fill unresolved "gaps" in experimentally resolved structures by using the sequence provided in the PDB or CIF file. If no sequence is provided, gaps cannot be filled. <strong>Note</strong>: This gap-filling does not predict actual gap structure but provides a filler for docking purposes. Useful for <em>blind docking</em> with QuickVINA-W or DiffDock.</p>
+</li>
+<li>
+<p><strong>Protein pH</strong>: Default is <code>7.0</code>. This pH value is used for adding hydrogens to protein sidechains.</p>
+</li>
+</ul>
+<p>After inputting the protein structure, Docker processes it into docking-ready formats. Output formats include:</p>
+<ul>
+<li><strong>PDBQT</strong>: For <em>AutoDock VINA</em> and its variants.</li>
+<li><strong>PDB</strong>: For <em>LeDock</em> and <em>DiffDock</em>.</li>
+</ul>
+<h3 id="configure-docking-settings"><strong>Configure Docking Settings</strong><a class="headerlink" href="#configure-docking-settings" title="Permanent link">&para;</a></h3>
+<p>Docker offers an interactive interface for configuring docking parameters.</p>
+<p><img alt="Docker Overview" src="images/docker/docker_overview.png" /></p>
+<p>To configure settings, click the <strong>Setting</strong> button to open the settings dialog.</p>
+<p><img alt="Docker Settings" src="images/docker/docker_settings.png" /></p>
+<h4 id="select-mode"><strong>Select Mode</strong><a class="headerlink" href="#select-mode" title="Permanent link">&para;</a></h4>
+<p>Determines the action applied when clicking on the protein structure:</p>
+<ul>
+<li><strong>Center</strong>: Set the docking center at the clicked position (amino acid or atom).</li>
+<li><strong>Flexible</strong>: Mark amino acids as flexible (only for AutoDock VINA and non-UniDock VINA variants).</li>
+<li><strong>Disable</strong>: Disable clicking.</li>
+</ul>
+<h4 id="fpocket-table"><strong>FPocket Table</strong><a class="headerlink" href="#fpocket-table" title="Permanent link">&para;</a></h4>
+<p>FPocketWeb can identify binding pockets. To use this feature, select <strong>Dock Utilities → FPocketWeb</strong> after loading a protein. If the protein is complex, users can edit it with <strong>Protein Editing</strong> to focus on specific domains before using FPocketWeb.<br>
+After pocket searching is complete, results can be visualized in FPocketWeb and imported back into Docker. The <strong>FPocket Table</strong> in Docker displays pocket data, and clicking the checkboxes in the <strong>Pocket #</strong> column applies the pocket's center and box size.</p>
+<p><img alt="Docker FPocket Table" src="images/docker/docker_fpocket_table.png" /></p>
+<h4 id="heteroatom-table"><strong>Heteroatom Table</strong><a class="headerlink" href="#heteroatom-table" title="Permanent link">&para;</a></h4>
+<p>Experimentally resolved protein structures often contain docked ligands that can serve as references. Heteroatoms (excluding water, acetate, sulfate, and glycerol) are listed in the <strong>Heteroatom Table</strong>, with a 1.5 Å padding applied by default.</p>
+<p><img alt="Docker Hetatm Table" src="images/docker/docker_hetatm_table.png" /></p>
+<p>To apply docking coordinates and box size, select the desired ligand checkbox in the <strong>Ligand</strong> column. Clicking the <em>Ref</em> hyperlink in the <strong>PDB</strong> column shows detailed ligand information.</p>
+<h4 id="protein-box"><strong>Protein Box</strong><a class="headerlink" href="#protein-box" title="Permanent link">&para;</a></h4>
+<p>The <strong>Protein Box</strong> option calculates a bounding box that encompasses the entire protein. This is particularly useful for <em>QuickVINA-W</em>, which requires input docking center coordinates and box dimensions for blind docking.</p>
+<h4 id="center-coordinate-box-widths"><strong>Center Coordinate &amp; Box Widths</strong><a class="headerlink" href="#center-coordinate-box-widths" title="Permanent link">&para;</a></h4>
+<p>Configure docking box center and dimensions. Center coordinates can be interactively set by choosing the <strong>Center</strong> option in <strong>Select Mode</strong>.</p>
+<h4 id="others"><strong>Others</strong><a class="headerlink" href="#others" title="Permanent link">&para;</a></h4>
+<p>Other parameters specific to downstream docking programs can be configured here.</p>
+<h4 id="protein-editing"><strong>Protein Editing</strong><a class="headerlink" href="#protein-editing" title="Permanent link">&para;</a></h4>
+<p>Docking is often performed on specific protein domains. Use the <strong>Protein Editing</strong> option to select chains and residues:</p>
+<ul>
+<li><strong>Chain Selection</strong>: Check/uncheck chains (e.g., Chain A, Chain B).</li>
+<li>
+<p><strong>Residue Selection</strong>: Specify residues using:</p>
+<ul>
+<li><strong>Num1-Num2</strong>: Keep residues between <code>Num1</code> and <code>Num2</code>.</li>
+<li><strong>~SEL</strong>: Invert the selection.</li>
+<li><strong>SEL1,SEL2</strong>: Select residues from <code>SEL1</code> or <code>SEL2</code>.</li>
+<li><strong>SEL1&amp;SEL2</strong>: Select residues overlapping between <code>SEL1</code> and <code>SEL2</code>.</li>
+<li><strong>SEL1,(SEL2&amp;SEL3)</strong>: Process parentheses first.</li>
+</ul>
+</li>
+</ul>
+<p>Examples:</p>
+<ul>
+<li><code>10-70</code>: Keep residues 10 to 70.</li>
+<li><code>~30-40</code>: Exclude residues 30 to 40.</li>
+<li><code>10-70,100-120</code>: Keep residues 10-70 or 100-120.</li>
+<li><code>10-120&amp;80-150</code>: Keep residues 80-120.</li>
+<li><code>10-70,80-150,(50-180&amp;10-100)</code>: Process parentheses first; result is residues 10-150.</li>
+</ul>
+<h4 id="flexible-position"><strong>Flexible Position</strong><a class="headerlink" href="#flexible-position" title="Permanent link">&para;</a></h4>
+<p>To mark residues as flexible for VINA variants:</p>
+<ul>
+<li>Use the <strong>Flexible</strong> option in <strong>Select Mode</strong> to click residues directly.</li>
+<li>Press <strong>Add</strong> then select corresponding chain alphabet and residue number through their respective dropdown menus.</li>
+<li>Press <strong>Auto</strong> to mark residues within the docking box (excluding glycine, alanine, and proline).</li>
+</ul>
+<h2 id="docking"><strong>Docking</strong><a class="headerlink" href="#docking" title="Permanent link">&para;</a></h2>
+<p>Docking can be performed locally or on cloud platforms.</p>
+<h3 id="local-docking"><strong>Local Docking</strong><a class="headerlink" href="#local-docking" title="Permanent link">&para;</a></h3>
+<p>Supports:</p>
+<ul>
+<li><strong>AutoDock VINA</strong></li>
+<li><strong>smina</strong></li>
+<li><strong>QuickVINA 2</strong></li>
+<li><strong>QuickVINA-W</strong></li>
+<li><strong>LeDock</strong> (not available on Windows)</li>
+<li><strong>Post-docking Refinement</strong></li>
+</ul>
+<h4 id="docking-with-vina-vina-variants-and-ledock"><strong>Docking with VINA, VINA Variants, and LeDock</strong><a class="headerlink" href="#docking-with-vina-vina-variants-and-ledock" title="Permanent link">&para;</a></h4>
+<p>After preparing the protein and configuring docking settings:
+1. Provide the ligand directory in <strong>Select Ligand Directory</strong>.
+   - <strong>PDBQT</strong> format for VINA and variants.
+   - <strong>MOL2</strong> format for LeDock.
+2. Provide an output directory in <strong>Select Output Directory</strong>.</p>
+<p><img alt="Docker Before Dock" src="images/docker/docker_before_dock.png" /></p>
+<p>Click <strong>Dock</strong> and select a docking program. The <strong>Concurrent</strong> parameter controls the number of parallel processes (max: CPU cores).</p>
+<p><img alt="Docker During Dock" src="images/docker/docker_during_dock.png" /></p>
+<p>Docking progress is displayed in the bottom-right table. The bottom-left log displays results for each ligand.</p>
+<p><img alt="Docker After Dock" src="images/docker/docker_after_dock.png" /></p>
+<h4 id="post-docking-refinement"><strong>Post-Docking Refinement</strong><a class="headerlink" href="#post-docking-refinement" title="Permanent link">&para;</a></h4>
+<p>Save docked results in <strong>Refine Format</strong> using <strong>Save → Filtered Structure → Refine Format → Directory</strong>. Use this directory as the input for <strong>Select Ligand Directory</strong> and select <strong>Dock → Refinement</strong> to start refinement.</p>
+<h3 id="cloud-docking"><strong>Cloud Docking</strong><a class="headerlink" href="#cloud-docking" title="Permanent link">&para;</a></h3>
+<p>Cloud platforms offload computational resources from local systems, making them ideal for resource-intensive programs like Uni-Dock, gnina, and DiffDock. Supported platforms include:</p>
+<h4 id="google-colab"><strong>Google Colab</strong><a class="headerlink" href="#google-colab" title="Permanent link">&para;</a></h4>
+<p>Pros:</p>
+<ul>
+<li>Free for limited use.</li>
+<li>Simple setup.</li>
+<li>Secure (not shared).</li>
+</ul>
+<p>Cons:</p>
+<ul>
+<li>Requires a Google account.</li>
+<li>Limited to ~2 hours of free usage per session.</li>
+<li>GPU memory (15 GB) of free tier may be insufficient for complex proteins.</li>
+<li>Limited CPU cores (1-2), slowing gnina.</li>
+</ul>
+<h4 id="hugging-face-spaces"><strong>Hugging Face Spaces</strong><a class="headerlink" href="#hugging-face-spaces" title="Permanent link">&para;</a></h4>
+<p>Pros:</p>
+<ul>
+<li>No user account required.</li>
+<li>Faster than Google Colab.</li>
+</ul>
+<p>Cons:</p>
+<ul>
+<li>Shared instances (insecure when multiple users are active).</li>
+</ul>
+<h4 id="runpod"><strong>RunPod</strong><a class="headerlink" href="#runpod" title="Permanent link">&para;</a></h4>
+<p>Pros:</p>
+<ul>
+<li>Secure (not shared).</li>
+</ul>
+<p>Cons:</p>
+<ul>
+<li>Paid service.</li>
+</ul>
+<p><strong>RunPod Setup</strong>:</p>
+<ol>
+<li>Visit <a href="https://www.runpod.io/">RunPod</a>.</li>
+<li>Log in and provide payment details.</li>
+<li>Deploy a pod using <strong>MolDocker_Desired Docking Program</strong> as the template.</li>
+<li>Connect via <strong>HTTP Service [Port 7860]</strong> to access the docking website.</li>
+</ol>
+<h4 id="website-interaction"><strong>Website Interaction</strong><a class="headerlink" href="#website-interaction" title="Permanent link">&para;</a></h4>
+<p>Upload the protein MDS file and ligands (zipped or CSV). For Uni-Dock and gnina, ensure ligands are zipped in the correct format (e.g., SDF for Uni-Dock, PDBQT for gnina). Use the <strong>Zip Result</strong> option in <strong>General Utilities</strong> to zip files.</p>
+<p>Checking the <strong>Zip Result</strong> checkbox will initiate the zipping process for the current docked directory. Once the files are zipped, users can download the zipped file from the file box below. To unzip and merge multiple downloaded ZIP files into a single directory, users can follow the instructions under <strong>Combine Multiple Directories / ZIP Files into a Single Directory</strong> in the <strong>General Utilities</strong> section.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": ".", "features": [], "search": "assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="assets/javascripts/bundle.83f73b43.min.js"></script>
+      
+    
+  </body>
+</html>

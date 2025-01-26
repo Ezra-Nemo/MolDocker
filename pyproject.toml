@@ -1,0 +1,86 @@
+[build-system]
+requires = ["setuptools", "setuptools-scm"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "MolDocker"
+version = "1.0.0a1"
+dependencies = [
+        "aiohappyeyeballs==2.4.3",
+        "aiohttp==3.11.7",
+        "aiosignal==1.3.1",
+        "annotated-types==0.7.0",
+        "attrs==24.2.0",
+        "cachetools==5.5.0",
+        "certifi==2024.8.30",
+        "charset-normalizer==3.4.0",
+        "darkdetect==0.7.1",
+        "flexcache==0.3",
+        "flexparser==0.4",
+        "frozenlist==1.5.0",
+        "idna==3.10",
+        "igraph==0.11.8",
+        "importlib_metadata==8.5.0",
+        "importlib_resources==6.4.5",
+        "lxml==5.3.0",
+        "multidict==6.1.0",
+        "networkx==3.4.2",
+        "numpy==2.2.1",
+        "openbabel-wheel==3.1.1.20",
+        "openff-amber-ff-ports @ git+https://github.com/openforcefield/openff-amber-ff-ports.git@28c4c66cea3cd0cd78760e5303bdeb49b4036172",
+        "openff-interchange @ git+https://github.com/openforcefield/openff-interchange.git@dec585ec1876e6a55a15027543e338c95b9f63f0",
+        "openff-models @ git+https://github.com/openforcefield/openff-models.git@ce272760567d28ceb16b23c21a28784fa737677d",
+        "openff-toolkit @ git+https://github.com/openforcefield/openff-toolkit.git@3d84c708f57671a3f733db9c0a5e0fff5fc7d49d",
+        "openff-units @ git+https://github.com/openforcefield/openff-units.git@c0654e99928e46b5486f412ce40674b47cc936fc",
+        "openff-utilities @ git+https://github.com/openforcefield/openff-utilities.git@b4d1e26dd0bd31e17e7ede3229f4377408188976",
+        "openforcefields @ git+https://github.com/Ezra-Nemo/openff-forcefields.git@8f3c83fff4dce99762a073b89c80801d82219149",
+        "OpenMM==8.2.0",
+        "openmmforcefields @ git+https://github.com/openmm/openmmforcefields.git@7a32d2d109a6cb44dd4344ef0482d7cf7f352cdd",
+        "openmmtools @ git+https://github.com/choderalab/openmmtools.git@f3f355a3bc4dc18f5aff68f6ca7f0808ae18b138",
+        "ordered-set==4.1.0",
+        "packaging==24.2",
+        "pandas==2.2.3",
+        "ParmEd==4.3.0",
+        "pillow==11.0.0",
+        "Pint==0.24.4",
+        "platformdirs==4.3.6",
+        "plotly==5.24.1",
+        "propcache==0.2.0",
+        "psutil==6.1.0",
+        "pydantic==2.10.1",
+        "pydantic_core==2.27.1",
+        "PyQtDarkTheme-fork @ git+https://github.com/henriquegemignani/PyQtDarkTheme.git@4715e906f005bf70f19bc4f1f4dc4cf7d08c175a",
+        "PySide6==6.8.0.2",
+        "PySide6_Addons==6.8.0.2",
+        "PySide6_Essentials==6.8.0.2",
+        "python-constraint==1.4.0",
+        "python-dateutil==2.9.0.post0",
+        "pytz==2024.2",
+        "rdkit==2024.3.6",
+        "requests==2.32.3",
+        "scipy==1.14.1",
+        "shapely==2.0.6",
+        "shiboken6==6.8.0.2",
+        "six==1.16.0",
+        "tenacity==9.0.0",
+        "texttable==1.7.0",
+        "typing_extensions==4.12.2",
+        "tqdm==4.67.1",
+        "tzdata==2024.2",
+        "urllib3==2.2.3",
+        "validators==0.34.0",
+        "wheel==0.45.0",
+        "xmltodict==0.14.2",
+        "yarl==1.18.0",
+        "zipp==3.21.0",
+        "zstandard==0.23.0"
+]
+requires-python = ">=3.12"
+description = "MolDocker: unifying molecular docking workflows to accelerate drug discovery from computation to experimentation"
+
+[project.gui-scripts]
+moldocker = "moldocker.splash_screen:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["moldocker*"]

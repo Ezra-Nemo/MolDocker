@@ -1,0 +1,5 @@
+zinc_id
+Catalog ID
+IDNUMBER
+Mol_ID
+Catalog_NO

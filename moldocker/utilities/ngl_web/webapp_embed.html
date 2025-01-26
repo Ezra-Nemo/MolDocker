@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>NGL - webapp</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+  <link rel="stylesheet" href="css/font-awesome.min.css" />
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="subresource" href="css/light.css" />
+  <link rel="subresource" href="css/dark.css" />
+</head>
+<body>
+  <!-- NGL -->
+  <script src="js/ngl.js"></script>
+
+  <!-- UI -->
+  <script src="js/lib/signals.min.js"></script>
+  <script src="js/lib/tether.min.js"></script>
+  <script src="js/lib/colorpicker.min.js"></script>
+  <script src="js/ui/ui.js"></script>
+  <script src="js/ui/ui.extra.js"></script>
+  <script src="js/ui/ui.ngl.js"></script>
+  <script src="js/gui.js"></script>
+  <script src="qrc:///qtwebchannel/qwebchannel.js"></script>
+
+  <script>
+    const originalWarn = console.warn;
+    console.warn = function(message) {
+      if (message.includes('THREE.WebGLRenderer: The property .useLegacyLights has been deprecated')) {
+        return;
+      }
+      originalWarn.apply(console, arguments);
+    };
+
+    NGL.cssDirectory = "css/"
+    NGL.documentationUrl = "../build/docs/"
+    NGL.examplesListUrl = "../build/scriptsList.json"
+    NGL.examplesScriptUrl = "./scripts/"
+
+    // Datasources
+    NGL.DatasourceRegistry.add("data", new NGL.StaticDatasource("../data/"))
+    var mdsrv = NGL.getQuery("mdsrv")
+    if (mdsrv) {
+      var mdsrvDatasource = new NGL.MdsrvDatasource(mdsrv)
+      NGL.DatasourceRegistry.add("file", mdsrvDatasource)
+      NGL.setListingDatasource(mdsrvDatasource)
+      NGL.setTrajectoryDatasource(mdsrvDatasource)
+    }
+
+    var stage;
+    document.addEventListener("DOMContentLoaded", function () {
+      stage = new NGL.Stage();
+      NGL.StageWidget(stage);
+      stage.mouseControls.remove('clickPick-left');
+      const aminoAcids = [
+        '[ALA]', '[ARG]', '[ASN]', '[ASP]', 
+        '[ASH]', '[ASX]', '[CYS]', '[GLN]',
+        '[GLU]', '[GLH]', '[GLY]', '[GLX]',
+        '[HIS]', '[ILE]', '[LEU]', '[LYS]',
+        '[MET]', '[PHE]', '[PRO]', '[SER]',
+        '[THR]', '[TRP]', '[TYR]', '[VAL]',
+        '[HID]', '[HIP]', '[CYX]', '[CYM]',
+        '[HIE]', '[LYN]'];
+      var proteinRepresentations = {};
+      var contactRepresentations = {};
+      var loaded = false;
+
+      var cssLinkElement = document.createElement('link');
+      cssLinkElement.rel = 'stylesheet';
+      cssLinkElement.id = 'theme';
+
+      function setTheme (value) {
+        var cssPath, bgColor
+        if (value === 'light') {
+          cssPath = NGL.cssDirectory + 'light.css'
+          bgColor = 'white'
+        } else {
+          cssPath = NGL.cssDirectory + 'dark.css'
+          bgColor = 'black'
+        }
+        cssLinkElement.href = cssPath
+        stage.setParameters({ backgroundColor: bgColor })
+        document.head.appendChild(cssLinkElement)
+      }
+
+      function showSideChain(componentName, selection, contact) {
+        contactRepresentations[componentName].setSelection(contact);
+      }
+
+      function loadCustomFile(path) {
+        stage.loadFile(path, {defaultRepresentation: false}).then(function(component) {
+          customBallStickRepresentation = component.addRepresentation("ball+stick", { sele: 'none' });
+          customBallStickRepresentation.setParameters( { 'multipleBond': 'symmetric', 'roughness': 0.8 });
+          component.addRepresentation("cartoon", { 'roughness': 0.8, 'smoothSheet': true });
+          component.addRepresentation("surface", { 'roughness': 0.8 }).setVisibility(false);
+          component.autoView();
+        });
+      }
+
+      function clearAllStageComponents(path) {
+        stage.removeAllComponents();
+        proteinRepresentations = {};
+        contactRepresentations = {};
+        loaded = false;
+      }
+
+      function clearComponentByName(name) {
+        var component = stage.getComponentsByName(name).list[0];
+        if (component) {{
+          stage.removeComponent(component);
+          delete proteinRepresentations[name];
+          delete contactRepresentations[name];
+        }}
+      }
+
+      function loadCustomPDBQTString(fileContent, name, color) {
+        var orientationMatrix = stage.viewerControls.getOrientation();
+        stage.loadFile(new Blob([fileContent], {type: 'text/plain'}), { ext: 'pdbqt' }).then(function(component) {
+          component.setName(name);
+          component.addRepresentation("ball+stick", { colorValue: color, 'multipleBond': 'symmetric' , 'roughness': 0.8 });
+        });
+        stage.viewerControls.orient(orientationMatrix);
+      }
+
+      function loadProteinLigandPDBString(fileContent, name, color) {
+        var orientationMatrix = stage.viewerControls.getOrientation();
+        stage.loadFile(new Blob([fileContent], {type: 'text/plain'}), { ext: 'pdb' }).then(function(component) {
+          component.setName(name);
+
+          var s = component.structure;
+          var chainSet = new Set();
+
+          s.eachChain(function (cp) {
+            chainSet.add(cp.chainname);
+          });
+
+          var numChains = chainSet.size;
+          var colorSchemeValue;
+
+          if (numChains <= 2) {
+            colorSchemeValue = 'residueindex';
+          } else {
+            colorSchemeValue = 'chainid';
+          }
+
+          component.addRepresentation("cartoon", {
+            roughness: 0.5,
+            smoothSheet: true,
+            colorScheme: colorSchemeValue,
+            colorScale: 'RdYlBu',
+            colorReverse: true,
+            subdiv: 50,
+            opacity: 0.5,
+          });
+          component.addRepresentation("ball+stick", {
+            sele: 'ligand',
+            colorScheme: 'element',
+            multipleBond: 'symmetric',
+            roughness: 0.5,
+            colorValue: color
+          });
+          component.addRepresentation("surface", {
+            roughness: 0.5,
+            sele: 'NOT ligand',
+            colorScheme: 'chainid',
+            colorScale: 'RdYlBu'
+          }).setVisibility(false);
+
+          contacts = NGL.calculateContacts(s)
+
+          var ContactDataDefaultParams = {
+              hydrogenBond: true,
+              hydrophobic: true,
+              halogenBond: true,
+              ionicInteraction: true,
+              metalCoordination: true,
+              cationPi: true,
+              piStacking: true,
+              weakHydrogenBond: false,
+              waterHydrogenBond: false,
+              backboneHydrogenBond: false,
+              radius: 1,
+              filterSele: 'ligand'
+            };
+
+          var contactData = NGL.getContactData(contacts, s, ContactDataDefaultParams);
+          var contactPicker = contactData.picking;
+          var contactDict = {}
+          for (idx in contactPicker.array) {
+            let a = contactPicker.getObject(idx);
+            let atom1Name = a.atom1.qualifiedName();
+            let atom2Name = a.atom2.qualifiedName();
+            let atom1SelString = null;
+            let atom2SelString = null;
+            
+            if (aminoAcids.some(prefix => atom1Name.startsWith(prefix))) {
+              atom1SelString = atom1Name.split(']')[1].split('.')[0];
+            }
+            
+            if (aminoAcids.some(prefix => atom2Name.startsWith(prefix))) {
+              atom2SelString = atom2Name.split(']')[1].split('.')[0];
+            }
+
+            let distance = a.atom1.distanceTo(a.atom2).toFixed(2);
+            
+            contactDict[idx] = {'type': a.type, 'atom1': atom1Name, 'atom2': atom2Name,
+            'atom1Sel': atom1SelString, 'atom2Sel': atom2SelString, 'distance': distance};
+          }
+
+          sendContactToPython([contactDict, name]);
+
+          var contactSeleList = [];
+          var contactContSeleList = [];
+
+          for (let key in contactDict) {
+            if (contactDict[key].atom1Sel) {
+              let sel = contactDict[key].atom1Sel;
+              // let seleString = sel + ".CA OR (" + sel + " and sidechain)";
+              let seleString = sel + " OR (" + sel + " and sidechain)";
+              let seleContString = sel + " OR (" + sel + " and sidechain)";
+              contactSeleList.push(seleString);
+              contactContSeleList.push(seleContString);
+            }
+            if (contactDict[key].atom2Sel) {
+              let sel = contactDict[key].atom2Sel;
+              // let seleString = sel + ".CA OR (" + sel + " and sidechain)";
+              let seleString = sel + " OR (" + sel + " and sidechain)";
+              let seleContString = sel + " OR (" + sel + " and sidechain)";
+              contactSeleList.push(seleString);
+              contactContSeleList.push(seleContString);
+            }
+          }
+
+          var contactBallStickSele = contactSeleList.join(" OR ");
+          var contactContactSele = contactContSeleList.join(" OR ")
+
+          if (contactBallStickSele.length === 0) {
+            var contactBallStickSele = 'None';
+          }
+          
+          // Add representation for neighboring amino acids
+          component.addRepresentation("ball+stick", {
+            sele: contactBallStickSele,
+            aspectRatio: 1.5,
+            colorScheme: 'element',
+            multipleBond: "symmetric",
+            roughness: 0.5,
+            opacity: 0.8,
+          });
+
+          contactRepresentations[name] = component.addRepresentation("contact", { 
+            sele: 'ligand OR ' + contactContactSele,
+            filterSele: 'ligand',
+            weakHydrogenBond: false, 
+            waterHydrogenBond: false, 
+            backboneHydrogenBond: false, 
+            metalCoordination: true, 
+            hydrophobic: true,
+            radiusSize: 0.08, 
+          });
+
+          if (!loaded) {
+              component.autoView();
+              loaded = true;
+          } else {
+              stage.viewerControls.orient(orientationMatrix);
+          }
+        });
+      }
+
+      function reorient() {
+        if (loaded) {
+          const component = stage.compList[0];
+          if (component.type === 'structure') {
+            component.autoView(300);
+          }
+        }
+      }
+
+      function sendCoordinateToPython(coordinates) {
+        JSON.stringify(coordinates);
+        window.pywebchannel.receiveCoordinates(coordinates);
+      }
+
+      function sendContactToPython(contactDict) {
+        window.pywebchannel.receiveContacts(JSON.stringify(contactDict));
+      }
+
+      new QWebChannel(qt.webChannelTransport, function(channel) {
+          window.pywebchannel = channel.objects.pywebchannel;
+      });
+
+      // stage.mouseControls.add('clickPick-left', function (stage, pickingProxy) {
+      //   if (pickingProxy && (pickingProxy.atom || pickingProxy.bond)) {
+      //     var atom = pickingProxy.atom || pickingProxy.closestBondAtom
+      //     sendCoordinateToPython(retrievePosition(pickingProxy))
+      //   }
+      // })
+
+      // function retrievePosition(pickingProxy) {
+      //   var atom = pickingProxy.atom || pickingProxy.closestBondAtom
+      //   var name = atom.qualifiedName();
+      //   var componentName = pickingProxy.component.name;
+      //   return { name: name, modelName: componentName}
+      // }
+
+      window.setTheme = setTheme;
+      window.loadCustomFile = loadCustomFile;
+      window.clearAllStageComponents = clearAllStageComponents;
+      window.loadCustomPDBQTString = loadCustomPDBQTString;
+      window.clearComponentByName = clearComponentByName;
+      window.showSideChain = showSideChain;
+      window.loadProteinLigandPDBString = loadProteinLigandPDBString;
+      window.reorient = reorient;
+      
+      var load = NGL.getQuery("load")
+      if (load) stage.loadFile(load, {defaultRepresentation: true})
+      
+      var script = NGL.getQuery("script")
+      if (script) stage.loadScript("./scripts/" + script + ".js")
+
+      var struc = NGL.getQuery("struc")
+      var traj = NGL.getQuery("traj")
+      if (struc) {
+        stage.loadFile(struc, {
+          defaultRepresentation: true
+        }).then(function(o) {
+          if (traj) o.addTrajectory(traj)
+        })
+      }
+      window.getCenterOfStructure = function() {
+        if (stage.compList.length > 0) {
+          var component = stage.compList[0];
+          var structure = component.structure;
+          var center = structure.getCenter();
+          return center.toArray();
+        }
+        return null;
+      };
+    })
+  </script>
+</body>
+</html>

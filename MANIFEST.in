@@ -1,0 +1,12 @@
+recursive-include moldocker/plot_empty *.html
+recursive-include moldocker/icon *.png *.ico
+recursive-include moldocker/docking_exec *
+recursive-include moldocker/utilities/ablock_rules *.txt
+recursive-include moldocker/utilities/database *.txt *.mddb
+recursive-include moldocker/utilities/fpocketweb *
+recursive-include moldocker/utilities/ngl_web *
+recursive-include moldocker/utilities/site *
+recursive-include moldocker/utilities/pdbfixer *.xml templates/*.pdb
+recursive-include moldocker/utilities/data *.json *.txt
+recursive-include moldocker/utilities/fp_param *.json
+recursive-include moldocker/utilities/rdeditor/icon_themes *

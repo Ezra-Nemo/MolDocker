@@ -1,0 +1,2 @@
+ChemDiv_RDKit https://www.chemdiv.com/catalog/screening-compounds/compound-{id}
+ChemDiv_Morgan https://www.chemdiv.com/catalog/screening-compounds/compound-{id}
