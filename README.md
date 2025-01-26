@@ -11,8 +11,15 @@ MolDocker streamlines and unifies the molecular docking pipeline by integrating 
 
 ### Installing
 
-MolDocker requires Python >= 3.12.
+MolDocker requires Python >= 3.12 and can be installed using one of the following methods:
+
+#### 1. Pre-Built Release (Stable Version)
+```bash
+pip install https://github.com/Ezra-Nemo/MolDocker/releases/download/v1.0.0-alpha.1/MolDocker-1.0.0a1-py3-none-any.whl
 ```
+
+#### 2. From Source (Development Version)
+```bash
 pip install git+https://github.com/Ezra-Nemo/MolDocker
 ```
 
